@@ -1,0 +1,14 @@
+<div class="chatbot-container">
+  <div class="chatbot-messages">
+    <div class="user-message" *ngIf="userMessage.trim() !== ''">
+      You: {{ userMessage }}
+    </div>
+    <div class="bot-message" *ngIf="botReply.trim() !== ''">
+      Bot: {{ botReply }}
+    </div>
+  </div>
+  <div class="chatbot-input">
+    <input type="text" [(ngModel)]="userMessage" placeholder="Enter your message" (keyup.enter)="sendMessage()">
+    <button (click)="sendMessage()">Send</button>
+  </div>
+</div>
