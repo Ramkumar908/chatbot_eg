@@ -1,0 +1,26 @@
+import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+@Component({
+  selector: 'app-chatbot',
+  templateUrl: './chatbot.component.html',
+  styleUrls: ['./chatbot.component.css']
+})
+export class ChatbotComponent {
+  userMessage = '';
+  botReply = '';
+
+  constructor(private http: HttpClient) { }
+
+  sendMessage(): void {
+    if (this.userMessage.trim() !== '') {
+      const requestBody = { message: this.userMessage };
+
+      this.http.post<any>('http://localhost:3000/chatbot', requestBody).subscribe(response => {
+        this.botReply = response.reply;
+      });
+
+      this.userMessage = '';
+    }
+  }
+}
